@@ -1,0 +1,202 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_PRIV_INSTRUCTION (0xc0000096) at pc=0x00007ffe3a8b5975, pid=7332, tid=16740
+#
+# JRE version:  (11.0.7+8) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (11.0.7+8-LTS, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# Problematic frame:
+# V  [jvm.dll+0xf5975]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF-8 com.amazonaws.ddb.DDB_Milestone2.StreamsAdapterDemo
+
+Host: Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz, 8 cores, 31G,  Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+Time: Tue Feb 23 18:27:07 2021 AUS Eastern Daylight Time elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000025420938000):  JavaThread "Unknown thread" [_thread_in_vm, id=16740, stack(0x000000a261b00000,0x000000a261c00000)]
+
+Stack: [0x000000a261b00000,0x000000a261c00000],  sp=0x000000a261bfea28,  free space=1018k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0xf5975]
+V  [jvm.dll+0x5c5df0]
+V  [jvm.dll+0x71a671]
+V  [jvm.dll+0x700fb8]
+V  [jvm.dll+0x71d3f0]
+V  [jvm.dll+0x3755a4]
+V  [jvm.dll+0x75fe6e]
+V  [jvm.dll+0x3e5b7d]
+V  [jvm.dll+0x3e8091]
+C  [javaw.exe+0x3617]
+C  [javaw.exe+0x17e2c]
+C  [KERNEL32.DLL+0x17974]
+C  [ntdll.dll+0x5a2d1]
+
+
+siginfo: EXCEPTION_PRIV_INSTRUCTION (0xc0000096)
+
+
+Registers:
+RAX=0x000000000000000b, RBX=0x0000000061bff188, RCX=0x0000025420938a10, RDX=0x0000000000000000
+RSP=0x000000a261bfea28, RBP=0x000000a261bfeb30, RSI=0x0000000000000001, RDI=0x0000000000000007
+R8 =0x0000000000000000, R9 =0xffffffffffffffff, R10=0x000000a261bfe938, R11=0x000000a261bfea20
+R12=0x0000000000000001, R13=0x0000000000000006, R14=0x0000000000000005, R15=0x0000000000000004
+RIP=0x00007ffe3a8b5975, EFLAGS=0x0000000000010297
+
+Top of Stack: (sp=0x000000a261bfea28)
+0x000000a261bfea28:   00007ffe3ad85df0 000000000000000b
+0x000000a261bfea38:   0000000000000001 0000000000000007
+0x000000a261bfea48:   0000000000000005 0000025420938a10
+0x000000a261bfea58:   0000000000000000 0000000000000004
+0x000000a261bfea68:   ffffffffffffffff ffffffffffffffff
+0x000000a261bfea78:   00000008ffffffff 0000000000000000
+0x000000a261bfea88:   00007ffe3af9b4a0 0000000000000000
+0x000000a261bfea98:   0000000000000009 0000000000000000
+0x000000a261bfeaa8:   00007ffe3af9b4a0 0000000000000004
+0x000000a261bfeab8:   ffffffffffffffff ffffffffffffffff
+0x000000a261bfeac8:   00000008ffffffff 0000000000000000
+0x000000a261bfead8:   00007ffe3af9b4a0 0000000000000000
+0x000000a261bfeae8:   0000000000000009 0000000000000000
+0x000000a261bfeaf8:   00007ffe3af9b4a0 0000000000000000
+0x000000a261bfeb08:   0000000000000002 0000000000000002
+0x000000a261bfeb18:   0000000000000003 00000254ffffffff 
+
+Instructions: (pc=0x00007ffe3a8b5975)
+0x00007ffe3a8b5955:   2d 93 3b ce 49 93 3b d2 66 93 3b e8 18 93 3b e8
+0x00007ffe3a8b5965:   d3 93 3b e9 e8 93 3b ec 1d 93 3b f2 3e 93 3b f8
+0x00007ffe3a8b5975:   e5 93 3b fd ef 93 3b ff f4 93 3c 02 18 93 3c 08
+0x00007ffe3a8b5985:   69 93 3c 10 ab 93 3c 14 6d 93 3c 18 21 93 3c 18 
+
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00000254207ca470, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe3af24f1d]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+
+[error occurred during error reporting (printing compressed oops mode), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe3af3bb87]
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff76cd40000 - 0x00007ff76cd87000 	C:\Program Files\Java\jdk-11.0.7\bin\javaw.exe
+0x00007ffe96790000 - 0x00007ffe9697c000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffe94390000 - 0x00007ffe94443000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffe92a30000 - 0x00007ffe92cc4000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffe94540000 - 0x00007ffe945e3000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffe964f0000 - 0x00007ffe9658e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffe945f0000 - 0x00007ffe9468f000 	C:\Windows\System32\sechost.dll
+0x00007ffe96590000 - 0x00007ffe966b0000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffe93bd0000 - 0x00007ffe93d67000 	C:\Windows\System32\USER32.dll
+0x00007ffe928b0000 - 0x00007ffe928d0000 	C:\Windows\System32\win32u.dll
+0x00007ffe94300000 - 0x00007ffe94329000 	C:\Windows\System32\GDI32.dll
+0x00007ffe92cd0000 - 0x00007ffe92e6c000 	C:\Windows\System32\gdi32full.dll
+0x00007ffe93740000 - 0x00007ffe937e0000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffe92e70000 - 0x00007ffe92f6a000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffe70e90000 - 0x00007ffe71109000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.1757_none_de724378534a71c4\COMCTL32.dll
+0x00007ffe8b0d0000 - 0x00007ffe8b0da000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffe95c00000 - 0x00007ffe95f2e000 	C:\Windows\System32\combase.dll
+0x00007ffe928d0000 - 0x00007ffe9294f000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffe94070000 - 0x00007ffe9409e000 	C:\Windows\System32\IMM32.DLL
+0x00007ffe92950000 - 0x00007ffe92976000 	C:\Windows\System32\bcrypt.dll
+0x00000254208e0000 - 0x00000254208f2000 	C:\Windows\System32\umppc12806.dll
+0x00007ffe77930000 - 0x00007ffe77946000 	C:\Program Files\Java\jdk-11.0.7\bin\vcruntime140.dll
+0x00007ffe5b830000 - 0x00007ffe5b8da000 	C:\Program Files\Java\jdk-11.0.7\bin\msvcp140.dll
+0x00007ffe3a7c0000 - 0x00007ffe3b321000 	C:\Program Files\Java\jdk-11.0.7\bin\server\jvm.dll
+0x00007ffe96430000 - 0x00007ffe96438000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffe83830000 - 0x00007ffe83839000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffe95b90000 - 0x00007ffe95bfd000 	C:\Windows\System32\WS2_32.dll
+0x00007ffe90950000 - 0x00007ffe90974000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffe90920000 - 0x00007ffe9094d000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x00007ffe92860000 - 0x00007ffe928aa000 	C:\Windows\System32\cfgmgr32.dll
+0x00007ffe92790000 - 0x00007ffe927a1000 	C:\Windows\System32\kernel.appcore.dll
+0x00007ffe776e0000 - 0x00007ffe776f1000 	C:\Program Files\Java\jdk-11.0.7\bin\verify.dll
+0x00007ffe825c0000 - 0x00007ffe827ad000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffe822a0000 - 0x00007ffe822ca000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffe71d60000 - 0x00007ffe71d89000 	C:\Program Files\Java\jdk-11.0.7\bin\java.dll
+0x00007ffe7cde0000 - 0x00007ffe7cdea000 	C:\Program Files\Java\jdk-11.0.7\bin\jimage.dll
+0x00007ffe71210000 - 0x00007ffe71226000 	C:\Program Files\Java\jdk-11.0.7\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-11.0.7\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.1757_none_de724378534a71c4;C:\Program Files\Java\jdk-11.0.7\bin\server
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: com.amazonaws.ddb.DDB_Milestone2.StreamsAdapterDemo
+java_class_path (initial): D:\Users\kucheriy\Documents\eclipse-workspace\DDB_Milestone2\target\classes;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-dynamodb\1.11.327\aws-java-sdk-dynamodb-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-s3\1.11.327\aws-java-sdk-s3-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-kms\1.11.327\aws-java-sdk-kms-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-core\1.11.327\aws-java-sdk-core-1.11.327.jar;C:\Users\kucheriy\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\kucheriy\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\kucheriy\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Users\kucheriy\.m2\repository\software\amazon\ion\ion-java\1.0.2\ion-java-1.0.2.jar;C:\Users\kucheriy\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-cbor\2.6.7\jackson-dataformat-cbor-2.6.7.jar;C:\Users\kucheriy\.m2\repository\joda-time\joda-time\2.8.1\joda-time-2.8.1.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\jmespath-java\1.11.327\jmespath-java-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\dynamodb-streams-kinesis-adapter\1.4.0\dynamodb-streams-kinesis-adapter-1.4.0.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-cloudwatch\1.11.327\aws-java-sdk-cloudwatch-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\amazonaws\aws-java-sdk-kinesis\1.11.327\aws-java-sdk-kinesis-1.11.327.jar;C:\Users\kucheriy\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.6.6\jackson-databind-2.6.6.jar;C:\Users\kucheriy\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.6.0\jackson-annotations-2.6.0.jar;C:\Users\kucheriy\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.6.6\jackson-core-2.6.6.jar;C:\Users\kucheriy\.m2\repository\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;C:\Users\kucheriy\.
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 536864512                                 {product} {ergonomic}
+   size_t MaxHeapSize                              = 8589832192                                {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5836300                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122910970                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122910970                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_251
+PATH=C:/Program Files/Java/jre1.8.0_281/bin/server;C:/Program Files/Java/jre1.8.0_281/bin;C:/Program Files/Java/jre1.8.0_281/lib/amd64;C:\Program Files\itacsvc;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Java\jre1.8.0_191\bin;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files (x86)\ACMEGuardian\;C:\Program Files\Amazon\AWSCLI\bin\;C:\Program Files\PuTTY\;C:\Program Files (x86)\Quarantine\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk1.8.0_271\bin;C:\Program Files (x86)\sbt\bin;C:\Program Files\nodejs\;C:\Users\kucheriy\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\kucheriy\AppData\Local\Programs\Python\Python39\;C:\Users\kucheriy\AppData\Local\Microsoft\WindowsApps;D:\Users\kucheriy\AppData\Roaming\npm;D:\Users\kucheriy\Documents\eclipse-java-2019-06-R-win32-x86_64\eclipse;
+USERNAME=kucheriy
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 63 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+
+CPU:total 8 (initial active 8) (8 cores per cpu, 1 threads per core) family 6 model 63 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, tsc, bmi1, bmi2, fma
+
+Memory: 4k page, system-wide physical 32767M (22206M free)
+TotalPageFile size 37631M (AvailPageFile size 26695M)
+current process WorkingSet (physical memory assigned to process): 9M, peak: 9M
+current process commit charge ("private bytes"): 11M, peak: 11M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (11.0.7+8-LTS) for windows-amd64 JRE (11.0.7+8-LTS), built on Mar 12 2020 02:04:32 by "mach5one" with MS VC++ 15.5 (VS2017)
+
+END.
