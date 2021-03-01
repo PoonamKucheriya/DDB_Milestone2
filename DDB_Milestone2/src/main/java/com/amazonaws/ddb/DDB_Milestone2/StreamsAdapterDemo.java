@@ -45,12 +45,10 @@ public class StreamsAdapterDemo {
     private static AmazonDynamoDBStreams dynamoDBStreamsClient;
     private static AmazonDynamoDBStreamsAdapterClient adapterClient;
 
-    //private static String tablePrefix = "KCL-Demo";
+    private static String tablePrefix = "KCL-Demo";
     private static String streamArn;
 
     private static Regions awsRegion = Regions.AP_SOUTHEAST_2;
-    
-    private static Region region = Region.AP_SOUTHEAST_2;
     
     private static AWSCredentialsProvider awsCredentialsProvider = DefaultAWSCredentialsProviderChain.getInstance();
 

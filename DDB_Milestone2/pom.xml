@@ -31,6 +31,13 @@
 			<artifactId>amazon-kinesis-client</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.11.1</version>
+</dependency>
+	
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>firehose</artifactId>

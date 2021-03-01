@@ -24,10 +24,14 @@ import com.amazonaws.services.kinesis.clientlibrary.types.ProcessRecordsInput;
 import com.amazonaws.services.kinesis.clientlibrary.types.ShutdownInput;
 import com.amazonaws.services.kinesis.model.Record;
 import software.amazon.awssdk.regions.Region;
-
 import software.amazon.awssdk.services.firehose.FirehoseClient;
-
 import java.nio.charset.Charset;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.StringReader;
+import java.util.List;
+import java.util.Map;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class StreamsRecordProcessor implements IRecordProcessor {
     private Integer checkpointCounter;
@@ -51,6 +55,11 @@ public class StreamsRecordProcessor implements IRecordProcessor {
         checkpointCounter = 0;
     }
 
+    ObjectMapper mapper = new ObjectMapper();
+    //By default all fields without explicit view definition are included, disable this
+    // Convert JSON string from file to Object
+
+        
     @Override
     public void processRecords(ProcessRecordsInput processRecordsInput) {
         for (Record record : processRecordsInput.getRecords()) {
@@ -60,33 +69,41 @@ public class StreamsRecordProcessor implements IRecordProcessor {
             if (record instanceof RecordAdapter) {
                 com.amazonaws.services.dynamodbv2.model.Record streamRecord = ((RecordAdapter) record)
                         .getInternalObject();
-                System.out.println("Before  getEventName...");
 
 				switch (streamRecord.getEventName()) {
 				case "INSERT":
-	                System.out.println("Inside  getEventName Insert...");
+					
+					//JsonNode mapToJsonObject(Map<String, AttributeValue> map) throws JacksonConverterException;
+					//StringReader reader = new StringReader(streamRecord.getDynamodb().getNewImage());
+				   // GdeltEvent GdeltEvent = mapper.readValue(reader, GdeltEvent.class);
+				    //System.out.println(GdeltEvent);
+				    
+					  System.out.println(streamRecord.getDynamodb().getNewImage());
+					  StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
+					  streamRecord.getDynamodb().getNewImage());
+					 
 					/*
-					 * StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
-					 * streamRecord.getDynamodb().getNewImage());
+					 * String textValue = "Poonam";
+					 * PutRecord.putSingleRecord(kinesisFireshoseClient,textValue, FireshoseName);
+					 * 
 					 */
-	                String textValue = "Poonam";
-	                PutRecord.putSingleRecord(kinesisFireshoseClient,textValue, FireshoseName);
-	                
 					break;
 				case "MODIFY":
-	                System.out.println("Inside  getEventName Modify...");
 					/*
+					 * 
 					 * StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
 					 * streamRecord.getDynamodb().getNewImage());
+					 * 
+					 * String textValue1 = "sandeep";
+					 * PutRecord.putSingleRecord(kinesisFireshoseClient,textValue1, FireshoseName);
+					 * 
+					 * break;
 					 */
-	                String textValue1 = "sandeep";
-	                PutRecord.putSingleRecord(kinesisFireshoseClient,textValue1, FireshoseName);
-	                
-					break;
 				case "REMOVE":
-	                System.out.println("Inside  getEventName Remove...");
-					StreamsAdapterDemoHelper.deleteItem(dynamoDBClient, tableName,
-							streamRecord.getDynamodb().getKeys().get("EventId").getN());
+					/*
+					 * StreamsAdapterDemoHelper.deleteItem(dynamoDBClient, tableName,
+					 * streamRecord.getDynamodb().getKeys().get("EventId").getN());
+					 */
 				}
             }
             checkpointCounter += 1;
