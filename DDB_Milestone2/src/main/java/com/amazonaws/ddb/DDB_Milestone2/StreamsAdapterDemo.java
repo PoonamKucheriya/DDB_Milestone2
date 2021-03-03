@@ -74,8 +74,7 @@ public class StreamsAdapterDemo {
         String srcTable = "Gdelt_event_data";
         String destTable = "Milestone2_Gdelt_event_KCL";
         recordProcessorFactory = new StreamsRecordProcessorFactory(dynamoDBClient, destTable);
-        //recordProcessorFactory = new StreamsRecordProcessorFactory(kinesisFireshoseClient, destTable);
-
+     
         //setUpTables();
         streamArn="arn:aws:dynamodb:ap-southeast-2:667162358382:table/Gdelt_event_data/stream/2021-02-13T06:43:20.314";
         workerConfig = new KinesisClientLibConfiguration("streams-adapter-demo1",

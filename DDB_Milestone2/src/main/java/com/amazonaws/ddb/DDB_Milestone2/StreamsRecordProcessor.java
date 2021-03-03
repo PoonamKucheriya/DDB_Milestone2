@@ -12,7 +12,6 @@
  * specific language governing permissions and limitations under the License.
 */
 
-
 package com.amazonaws.ddb.DDB_Milestone2;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -27,109 +26,91 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.firehose.FirehoseClient;
 import java.nio.charset.Charset;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.StringReader;
-import java.util.List;
-import java.util.Map;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.fasterxml.jackson.databind.JsonNode;
+
 
 public class StreamsRecordProcessor implements IRecordProcessor {
-    private Integer checkpointCounter;
+	private Integer checkpointCounter;
 
-    private final AmazonDynamoDB dynamoDBClient;
-    private final String tableName;
-    private final Region region = Region.AP_SOUTHEAST_2;
-    private final String FireshoseName="Gdelt_event_data";
-    
-    FirehoseClient kinesisFireshoseClient = FirehoseClient.builder()
-            .region(region)
-            .build();
+	private final AmazonDynamoDB dynamoDBClient;
+	private final String tableName;
+	private final Region region = Region.AP_SOUTHEAST_2;
+	private final String FireshoseName = "Gdelt_event_data";
 
-    public StreamsRecordProcessor(AmazonDynamoDB dynamoDBClient2, String tableName) {
-        this.dynamoDBClient = dynamoDBClient2;
-        this.tableName = tableName;
-    }
+	FirehoseClient kinesisFireshoseClient = FirehoseClient.builder().region(region).build();
 
-    @Override
-    public void initialize(InitializationInput initializationInput) {
-        checkpointCounter = 0;
-    }
+	public StreamsRecordProcessor(AmazonDynamoDB dynamoDBClient2, String tableName) {
+		this.dynamoDBClient = dynamoDBClient2;
+		this.tableName = tableName;
+	}
 
-    ObjectMapper mapper = new ObjectMapper();
-    //By default all fields without explicit view definition are included, disable this
-    // Convert JSON string from file to Object
+	@Override
+	public void initialize(InitializationInput initializationInput) {
+		checkpointCounter = 0;
+	}
 
-        
-    @Override
-    public void processRecords(ProcessRecordsInput processRecordsInput) {
-        for (Record record : processRecordsInput.getRecords()) {
-            String data = new String(record.getData().array(), Charset.forName("UTF-8"));
-            System.out.println(data);
-           
-            if (record instanceof RecordAdapter) {
-                com.amazonaws.services.dynamodbv2.model.Record streamRecord = ((RecordAdapter) record)
-                        .getInternalObject();
+	ObjectMapper mapper = new ObjectMapper();
 
-				switch (streamRecord.getEventName()) {
-				case "INSERT":
-					
-					//JsonNode mapToJsonObject(Map<String, AttributeValue> map) throws JacksonConverterException;
-					//StringReader reader = new StringReader(streamRecord.getDynamodb().getNewImage());
-				   // GdeltEvent GdeltEvent = mapper.readValue(reader, GdeltEvent.class);
-				    //System.out.println(GdeltEvent);
-				    
-					  System.out.println(streamRecord.getDynamodb().getNewImage());
-					  StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
-					  streamRecord.getDynamodb().getNewImage());
-					 
-					/*
-					 * String textValue = "Poonam";
-					 * PutRecord.putSingleRecord(kinesisFireshoseClient,textValue, FireshoseName);
-					 * 
-					 */
-					break;
-				case "MODIFY":
-					/*
-					 * 
-					 * StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
-					 * streamRecord.getDynamodb().getNewImage());
-					 * 
-					 * String textValue1 = "sandeep";
-					 * PutRecord.putSingleRecord(kinesisFireshoseClient,textValue1, FireshoseName);
-					 * 
-					 * break;
-					 */
-				case "REMOVE":
-					/*
-					 * StreamsAdapterDemoHelper.deleteItem(dynamoDBClient, tableName,
-					 * streamRecord.getDynamodb().getKeys().get("EventId").getN());
-					 */
+	@Override
+	public void processRecords(ProcessRecordsInput processRecordsInput) {
+		for (Record record : processRecordsInput.getRecords()) {
+			String data = new String(record.getData().array(), Charset.forName("UTF-8"));
+			// System.out.println(data);
+
+			if (record instanceof RecordAdapter) {
+				com.amazonaws.services.dynamodbv2.model.Record streamRecord = ((RecordAdapter) record)
+						.getInternalObject();
+
+				String year = streamRecord.getDynamodb().getNewImage().get("Year").getN();
+				//System.out.println("Inside Insert" + year);
+				int yearint = Integer.parseInt(year);
+				if (yearint >= 2013 && yearint <= 2014) {
+					switch (streamRecord.getEventName()) {
+					case "INSERT":
+
+						StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
+								streamRecord.getDynamodb().getNewImage());
+						break;
+					case "MODIFY":
+
+						/*
+						 * StreamsAdapterDemoHelper.putItem(dynamoDBClient, tableName,
+						 * streamRecord.getDynamodb().getNewImage());
+						 * 
+						 * String textValue1 = "sandeep";
+						 * PutRecord.putSingleRecord(kinesisFireshoseClient, textValue1, FireshoseName);
+						 * 
+						 * break;
+						 */
+
+					case "REMOVE":
+						/*
+						 * StreamsAdapterDemoHelper.deleteItem(dynamoDBClient, tableName,
+						 * streamRecord.getDynamodb().getKeys().get("EventId").getN());
+						 */
+					}
 				}
-            }
-            checkpointCounter += 1;
-            if (checkpointCounter % 10 == 0) {
-                try {
-                    processRecordsInput.getCheckpointer().checkpoint();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-    }
+			}
+			checkpointCounter += 1;
+			if (checkpointCounter % 10 == 0) {
+				try {
+					processRecordsInput.getCheckpointer().checkpoint();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-    @Override
-    public void shutdown(ShutdownInput shutdownInput) {
-        if (shutdownInput.getShutdownReason() == ShutdownReason.TERMINATE) {
-            try {
-                shutdownInput.getCheckpointer().checkpoint();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        
-    }    
+	}
+
+	@Override
+	public void shutdown(ShutdownInput shutdownInput) {
+		if (shutdownInput.getShutdownReason() == ShutdownReason.TERMINATE) {
+			try {
+				shutdownInput.getCheckpointer().checkpoint();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 }
-
